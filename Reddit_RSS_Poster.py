@@ -73,7 +73,7 @@ class Reddit(object):
 		self.title = title
 		authenticated_user = r.get_me()
 		try: 
-			r.submit(subreddit, title, text=body)
+			r.submit(self.subreddit, title, text=body)
 		except:
 			print("try again later")
 	
@@ -124,5 +124,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-	
-	
