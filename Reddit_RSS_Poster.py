@@ -79,13 +79,6 @@ class Reddit(object):
 		except:
 			print("try again later")
 	
-def checkOutput():	
-	try:
-		if sys.stdout.encoding != 'UTF-8':
-			sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
-	except:
-		print("Verify UTF-8 output on your system")
-	
 def getDate():
 	return time.gmtime()
 	
@@ -110,7 +103,6 @@ def getFeeds():
 			
 def writeFeeds(feeds):
 	reddit = Reddit("Update Page 1.0 by /u/TheHipcrimeVocab")
-	checkOutput()
 	for feed in feeds:
 		site = feed
 		print(site[0] + "\n")
