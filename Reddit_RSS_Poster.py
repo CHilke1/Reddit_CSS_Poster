@@ -80,8 +80,11 @@ class Reddit(object):
 			print("try again later")
 	
 def checkOutput():	
-	if sys.stdout.encoding != 'UTF-8':
-		sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+	try:
+		if sys.stdout.encoding != 'UTF-8':
+			sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+	except:
+		print("Verify UTF-8 output on your system")
 	
 def getDate():
 	return time.gmtime()
@@ -95,7 +98,6 @@ def getFeeds():
 	files = reader.get_file("sites.txt")
 	allrss = []
 	for file in files:
-		print(str(file))
 		rss = []
 		f = Feed(file)
 		rss.append(f.get_title())
