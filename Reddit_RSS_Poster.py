@@ -7,6 +7,8 @@ from appdata import OAuth, userdata
 import requests
 import requests.auth
 import re
+import sys
+import codecs
 
 class Filereader(object):
 	def __init__(self):
@@ -77,6 +79,10 @@ class Reddit(object):
 		except:
 			print("try again later")
 	
+def checkOutput():	
+	if sys.stdout.encoding != 'UTF-8':
+		sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+	
 def getDate():
 	return time.gmtime()
 	
@@ -102,16 +108,17 @@ def getFeeds():
 			
 def writeFeeds(feeds):
 	reddit = Reddit("Update Page 1.0 by /u/TheHipcrimeVocab")
+	checkOutput()
 	for feed in feeds:
 		site = feed
 		print(site[0] + "\n")
 		print(site[1] + "\n")
 		for i in range(2, 4):
 			show = site[i]
-			title = str(site[0]) + " " + str(show['title'])
-			print(title + "\n")
+			title = str(site[0]) + " " + str(show['title'] + "\n")
+			print(title)
 			link = "[" + show['title'] + "](" + show['link'] + ")"
-			description = link + " - " + stripHTML(show['summary']) + "\n"
+			description = link + " - " + stripHTML(show['summary'] + "\n")
 			print(description)
 			today = getDate()
 			if today > show['published_parsed']:
